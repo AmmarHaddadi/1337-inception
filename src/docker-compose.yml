@@ -1,36 +1,64 @@
 version: '3.8'
 
 services:
-  mariadb:
-    build:
-      context: ./maria
-      dockerfile: Dockerfile
-    image: mariadb
-    container_name: mariadb
-    restart: on-failure
-    networks:
-      - my_network
-    volumes:
-      - db_data:/var/lib/mysql
-    secrets:
-      - maria_normal
-      - maria_root
+        mariadb:
+                build:
+                        context: ./maria
+                        dockerfile: Dockerfile
+                image: mariadb
+                container_name: mariadb
+                restart: on-failure
+                networks:
+                        - my_network
+                volumes:
+                        - db_data:/var/lib/mysql
+                secrets:
+                        - maria_normal
+                        - maria_root
+                env_file:
+                        - .env
+        wordpress:
+                build:
+                        context: ./wordpress
+                        dockerfile: Dockerfile
+                image: wordpress
+                container_name: wordpress
+                restart: on-failure
+                depends_on:
+                        - mariadb
+                env_file:
+                        - .env
+                networks:
+                        - my_network
+                volumes:
+                        - wp_data:/var/www/html
+                secrets:
+                        - maria_normal
+                        - maria_root
+                        - wp_credentials
 
 networks:
-  my_network:
-    driver: bridge
+        my_network:
+                driver: bridge
 
 volumes:
-  db_data:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      # change this 
-      device: /workspaces/codespaces-blank/data/maria
+        db_data:
+                driver: local
+                driver_opts:
+                        type: none
+                        o: bind
+                        # change this 
+                        device: /workspaces/codespaces-blank/data/maria
+        wp_data:
+                driver: local
+                driver_opts:
+                        type: none
+                        o: bind
+                        # change this 
+                        device: /workspaces/codespaces-blank/data/wordpress
 
 secrets:
-  maria_normal:
-    file: ../secrets/maria_normal
-  maria_root:
-    file: ../secrets/maria_root
+        maria_normal:
+                file: ../secrets/maria_normal
+        maria_root:
+                file: ../secrets/maria_root

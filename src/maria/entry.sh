@@ -21,8 +21,8 @@ if [ ! -d "/var/lib/mysql/mysql" ]; then
 FLUSH PRIVILEGES;
 ALTER USER 'root'@'localhost' IDENTIFIED BY '$ROOT_PASS';
 CREATE DATABASE IF NOT EXISTS wordpress;
-CREATE USER 'ammar'@'%' IDENTIFIED BY '$USER_PASS';
-GRANT ALL PRIVILEGES ON wordpress.* TO 'ammar'@'%';
+CREATE USER '$MARIA_USERNAME'@'%' IDENTIFIED BY '$USER_PASS';
+GRANT ALL PRIVILEGES ON wordpress.* TO '$MARIA_USERNAME'@'%';
 FLUSH PRIVILEGES;
 EOF
 
@@ -30,7 +30,7 @@ EOF
     mariadbd --user=mysql --bootstrap < "$tmpscript"
     rm -f "$tmpscript"
     
-    echo "Database successfully bootstrapped!"
+    echo "Database successfully bootstrapped"
 fi
 
 
