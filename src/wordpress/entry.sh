@@ -1,9 +1,14 @@
 #!/bin/sh
 
+set -e
+
 echo "Waiting for maria to start"
 while ! mysqladmin ping -h"mariadb" --silent; do
     sleep 1
 done
+
+mkdir -p /var/www/html
+chown -R www-data:www-data /var/www/html
 
 if [ ! -f "wp-config.php" ]; then
     echo "installing wordpress"
@@ -11,7 +16,7 @@ if [ ! -f "wp-config.php" ]; then
 
     DB_PASS=$(cat /run/secrets/maria_normal)
     WP_ADMIN_PASS=$(cat /run/secrets/maria_root) 
-    WP_USER_PASS=$(cat /run/secrets/wp_credentials)
+    WP_USER_PASS=$(cat /run/secrets/wp_user_pass)
 
     wp config create \
         --dbname=wordpress \

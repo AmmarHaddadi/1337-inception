@@ -25,8 +25,8 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
     && mv wp-cli.phar /usr/local/bin/wp
 
 
-COPY ./www.conf /etc/php83/php-fpm.d/www.conf
-COPY ./entry.sh /usr/local/bin/entry.sh
+COPY www.conf /etc/php83/php-fpm.d/www.conf
+COPY entry.sh /usr/local/bin/entry.sh
 RUN chmod +x /usr/local/bin/entry.sh
 
 WORKDIR /var/www/html

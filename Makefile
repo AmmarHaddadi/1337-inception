@@ -21,12 +21,12 @@ clean: down
 
 fclean: clean
 	sudo rm -rf $(DATA_DIR)/maria
-	sudo rm -rf $(DATA_DIR)/wp
+	sudo rm -rf $(DATA_DIR)/wordpress
 
 re: fclean up
 
 create_dirs:
 	@mkdir -p $(DATA_DIR)/maria
-	@mkdir -p $(DATA_DIR)/wp
+	@mkdir -p $(DATA_DIR)/wordpress
 
 .PHONY: all up down clean fclean re create_dirs

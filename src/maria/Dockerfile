@@ -7,7 +7,7 @@ RUN mkdir -p /run/mysqld && chown -R mysql:mysql /run/mysqld \
 
 COPY 50-server.cnf /etc/my.cnf.d/50-server.cnf
 
-COPY ./entry.sh /usr/local/bin/entry.sh
+COPY entry.sh /usr/local/bin/entry.sh
 RUN chmod +x /usr/local/bin/entry.sh
 
 EXPOSE 3306

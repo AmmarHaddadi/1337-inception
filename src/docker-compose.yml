@@ -35,7 +35,22 @@ services:
                 secrets:
                         - maria_normal
                         - maria_root
-                        - wp_credentials
+                        - wp_user_pass
+        nginx:
+                build:
+                        context: ./nginx
+                        dockerfile: Dockerfile
+                image: nginx
+                container_name: nginx
+                restart: on-failure
+                depends_on:
+                        - wordpress
+                ports:
+                        - "443:443"
+                networks:
+                        - my_network
+                volumes:
+                        - wp_data:/var/www/html
 
 networks:
         my_network:
@@ -62,3 +77,5 @@ secrets:
                 file: ../secrets/maria_normal
         maria_root:
                 file: ../secrets/maria_root
+        wp_user_pass:
+                file: ../secrets/wp_user_pass
