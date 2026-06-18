@@ -18,6 +18,9 @@ RUN apk update && apk upgrade && apk add --no-cache \
     mariadb-client \
     curl
 
+# this fixes wordpress  | env: can't execute 'php': No such file or directory
+RUN ln -s /usr/bin/php83 /usr/bin/php
+
 RUN adduser -S -G www-data www-data
 
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \

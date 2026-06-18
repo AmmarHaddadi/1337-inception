@@ -5,6 +5,9 @@ RUN apk update && apk upgrade && apk add --no-cache mariadb mariadb-client
 RUN mkdir -p /run/mysqld && chown -R mysql:mysql /run/mysqld \
     && mkdir -p /var/lib/mysql && chown -R mysql:mysql /var/lib/mysql
 
+# to guarantee there is no conflict
+RUN rm -f /etc/my.cnf.d/*
+
 COPY 50-server.cnf /etc/my.cnf.d/50-server.cnf
 
 COPY entry.sh /usr/local/bin/entry.sh

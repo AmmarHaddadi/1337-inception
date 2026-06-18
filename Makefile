@@ -2,10 +2,13 @@ COMPOSE_FILE  = src/docker-compose.yml
 # change this
 DATA_DIR      = /workspaces/codespaces-blank/data
 
-default: up
+default: up-watch
 
 up: create_dirs
 	docker compose -f $(COMPOSE_FILE) up --build -d
+
+up-watch: create_dirs
+	docker compose -f $(COMPOSE_FILE) up --build 
 
 down:
 	docker compose -f $(COMPOSE_FILE) down
@@ -28,5 +31,6 @@ re: fclean up
 create_dirs:
 	@mkdir -p $(DATA_DIR)/maria
 	@mkdir -p $(DATA_DIR)/wordpress
+	@chmod 777 $(DATA_DIR)/*
 
 .PHONY: all up down clean fclean re create_dirs
