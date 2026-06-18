@@ -2,10 +2,15 @@
 
 set -e
 
-# echo "Waiting for maria to start"
-# while ! mysqladmin ping -h"mariadb" --silent; do
-#     sleep 1
-# done
+cd /var/www/html
+
+# wait V2
+echo "Waiting for MariaDB to bind to port 3306..."
+while ! nc -z mariadb 3306; do
+     sleep 1
+done
+echo "MariaDB network port is open and reachable!"
+
 
 mkdir -p /var/www/html
 chown -R www-data:www-data /var/www/html

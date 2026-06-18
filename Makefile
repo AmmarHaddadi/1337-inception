@@ -1,6 +1,6 @@
 COMPOSE_FILE  = src/docker-compose.yml
 # change this
-DATA_DIR      = /workspaces/codespaces-blank/data
+DATA_DIR      = ./data
 
 default: up-watch
 
@@ -23,8 +23,8 @@ clean: down
 	docker system prune -a --volumes -f
 
 fclean: clean
-	sudo rm -rf $(DATA_DIR)/maria
-	sudo rm -rf $(DATA_DIR)/wordpress
+	rm -rf $(DATA_DIR)/maria
+	rm -rf $(DATA_DIR)/wordpress
 
 re: fclean up
 
