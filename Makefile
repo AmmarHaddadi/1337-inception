@@ -23,8 +23,7 @@ clean: down
 	docker system prune -a --volumes -f
 
 fclean: clean
-	rm -rf $(DATA_DIR)/maria
-	rm -rf $(DATA_DIR)/wordpress
+	rm -rf $(DATA_DIR)
 
 re: fclean up
 
