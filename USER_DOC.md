@@ -38,5 +38,5 @@ After copying them, replace the placeholder values with your own credentials and
 
 ## Check Running Services
 
-- `docker compose -f src/docker-compose.yml ps`
-- `docker compose -f src/docker-compose.yml logs`
+- `docker compose -f srcs/docker-compose.yml ps`
+- `docker compose -f srcs/docker-compose.yml logs`

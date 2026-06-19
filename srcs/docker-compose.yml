@@ -62,13 +62,13 @@ volumes:
                 driver_opts:
                         type: none
                         o: bind
-                        device: /Users/ahaddadi/cursus-repos/inception/data/maria
+                        device: /home/ahaddadi/data/maria
         wp_data:
                 driver: local
                 driver_opts:
                         type: none
                         o: bind
-                        device: /Users/ahaddadi/cursus-repos/inception/data/wordpress
+                        device: /home/ahaddadi/data/wordpress
 
 secrets:
         maria_normal:

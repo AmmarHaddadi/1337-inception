@@ -1,6 +1,5 @@
-COMPOSE_FILE  = src/docker-compose.yml
-# change this
-DATA_DIR      = ./data
+COMPOSE_FILE  = srcs/docker-compose.yml
+DATA_DIR      = /home/ahaddadi/data
 
 default: up-watch
 
@@ -32,4 +31,4 @@ create_dirs:
 	@mkdir -p $(DATA_DIR)/wordpress
 	@chmod 777 $(DATA_DIR)/*
 
-.PHONY: all up down clean fclean re create_dirs
+.PHONY: all up down clean fclean re create_dirs start stop up-watch
